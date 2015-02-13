@@ -1,0 +1,1 @@
+/home/pit/dwm/config.h
