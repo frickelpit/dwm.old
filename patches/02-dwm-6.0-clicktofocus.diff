@@ -1,0 +1,23 @@
+http://hg.punctweb.ro
+
+--- a/dwm.c	2012-04-15 15:03:17.662134727 +0300
++++ b/dwm.c	2012-04-15 15:03:17.665134727 +0300
+@@ -866,6 +866,8 @@ drawtext(const char *text, unsigned long
+ 
+ void
+ enternotify(XEvent *e) {
++	if(clicktofocus) return;
++
+ 	Client *c;
+ 	Monitor *m;
+ 	XCrossingEvent *ev = &e->xcrossing;
+@@ -1256,6 +1258,8 @@ monocle(Monitor *m) {
+ 
+ void
+ motionnotify(XEvent *e) {
++	if(clicktofocus) return;
++
+ 	static Monitor *mon = NULL;
+ 	Monitor *m;
+ 	XMotionEvent *ev = &e->xmotion;
+
