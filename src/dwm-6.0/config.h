@@ -46,13 +46,13 @@ static const Bool resizehints 			= False; 	/* True means respect size hints in t
 #include "fibonacci.c"
 #include "bstack.c"
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "",      tile },    /* first entry is default */
-	{ "",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
-	{ "",      spiral },
-	{ "",      dwindle },
-	{ "",      bstack },
+	/* symbol	arrange 	function */
+	{ "",		tile },    	/* first entry is default */
+	{ "",		NULL },    	/* no layout function means floating behavior */
+	{ "",		monocle },	
+	{ "",		spiral },
+	{ "",		dwindle },
+	{ "",		bstack },
 };
 
 /* key definitions */
@@ -80,17 +80,15 @@ static const char *quitcmd[]		= { "killall", "startdwm", NULL };
 static const char *imcmd[]		= { "urxvtc", "-title", "jabber", "-e", "profanity", NULL };
 static const char *mailcmd[]		= { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char *newscmd[]		= { "urxvtc", "-title", "newsbeuter", "-e", "newsbeuter", NULL };
-static const char *runecmd[]		= { "/home/pit/.runeaudio-e8633f3a69748ca5d9dc8468b5df4351/webapprt-stub", NULL };
 static const char *musiccmd[]		= { "urxvtc", "-title", "ncmpcpp", "-e", "ncmpcpp", NULL };
-static const char *rebootcmd[]		= { "/home/pit/.bin/reboot", NULL };
-static const char *shutdowncmd[]	= { "/home/pit/.bin/shutdown", NULL };
+static const char *rebootcmd[]		= { "systemctl", "reboot" };
+static const char *shutdowncmd[]	= { "systemctl", "poweroff" };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        	function        argument */
 	{ MODKEY,                       XK_p,      	spawn,          {.v = dmenucmd } },
 	{ MODKEY,	                XK_Return, 	spawn,          {.v = termcmd } },
-	/*{ MODKEY,                       XK_b,      	togglebar,      {0} },*/
 	{ MODKEY,                       XK_j,      	focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      	focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      	incnmaster,     {.i = +1 } },
@@ -132,7 +130,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_p,		spawn,		{.v = imcmd } },
 	{ MODKEY|ControlMask,		XK_g,		spawn,		{.v = mailcmd } },
 	{ MODKEY|ControlMask,		XK_n,		spawn,		{.v = newscmd } },
-	{ MODKEY|ControlMask,		XK_a,		spawn,		{.v = runecmd } },
 	{ MODKEY|ControlMask,		XK_m,		spawn,		{.v = musiccmd } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = rebootcmd } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		{.v = shutdowncmd } },
