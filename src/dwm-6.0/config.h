@@ -29,6 +29,7 @@ static const char *tags[] = { "web", "chat|music", "mail|news", "other" };
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
 	{ "Firefox",	NULL,		NULL,		1,		False,		-1 },
+	{ "Pcmanfm",	NULL,		NULL,		1 << 3,		True,		-1 },
 	{ NULL,		NULL,		"mutt",		1 << 2,		False,		-1 },
 	{ NULL,		NULL,		"newsbeuter",	1 << 2,		False,		-1 },
 	{ NULL,		NULL,		"irssi",	1 << 1,		False,		-1 },
