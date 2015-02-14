@@ -81,8 +81,8 @@ static const char *imcmd[]		= { "urxvtc", "-title", "jabber", "-e", "profanity",
 static const char *mailcmd[]		= { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char *newscmd[]		= { "urxvtc", "-title", "newsbeuter", "-e", "newsbeuter", NULL };
 static const char *musiccmd[]		= { "urxvtc", "-title", "ncmpcpp", "-e", "ncmpcpp", NULL };
-static const char *rebootcmd[]		= { "systemctl", "reboot" };
-static const char *shutdowncmd[]	= { "systemctl", "poweroff" };
+static const char *rebootcmd[]		= { "systemctl", "reboot", NULL };
+static const char *shutdowncmd[]	= { "systemctl", "poweroff", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
