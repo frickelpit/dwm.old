@@ -50,8 +50,8 @@ static const Layout layouts[] = {
 	{ "",		tile },    	/* first entry is default */
 	{ "",		NULL },    	/* no layout function means floating behavior */
 	{ "",		monocle },	
-	{ "",		spiral },
-	{ "",		dwindle },
+	{ "",		spiral },
+	{ "",		dwindle },
 	{ "",		bstack },
 };
 
@@ -78,7 +78,6 @@ static const char *screenshotcmd[]	= { "scrot", "-e", "mv $f ~/Desktop 2>/dev/nu
 static const char *mcmd[]		= { "urxvtc", "-title", "mc", "-e", "mc", NULL };
 static const char *quitcmd[]		= { "killall", "startdwm", NULL };
 static const char *imcmd[]		= { "urxvtc", "-title", "jabber", "-e", "profanity", NULL };
-static const char *mailcmd[]		= { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char *newscmd[]		= { "urxvtc", "-title", "newsbeuter", "-e", "newsbeuter", NULL };
 static const char *musiccmd[]		= { "urxvtc", "-title", "ncmpcpp", "-e", "ncmpcpp", NULL };
 static const char *rebootcmd[]		= { "systemctl", "reboot", NULL };
@@ -128,7 +127,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_f,		spawn,		{.v = mcmd } },
 	{ MODKEY|ControlMask,		XK_q,		spawn,		{.v = quitcmd } },
 	{ MODKEY|ControlMask,		XK_p,		spawn,		{.v = imcmd } },
-	{ MODKEY|ControlMask,		XK_g,		spawn,		{.v = mailcmd } },
 	{ MODKEY|ControlMask,		XK_n,		spawn,		{.v = newscmd } },
 	{ MODKEY|ControlMask,		XK_m,		spawn,		{.v = musiccmd } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = rebootcmd } },
