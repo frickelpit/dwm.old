@@ -1,7 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*" "," "-*-ohsnap-medium-*-normal-*-14-*-*-*-*-*-*-*";
+static const char font[]            = "-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*" "," "-*-termsyn-medium-*-normal-*-14-*-*-*-*-*-*-*";
+/*static const char font[]	= "Dejavu Sans Mono-9:normal";*/
 #define NUMCOLORS	8	
 static const char colors[NUMCOLORS][ColLast][8] = {
    /* border	foreground  background */
