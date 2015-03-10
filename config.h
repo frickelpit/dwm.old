@@ -2,7 +2,6 @@
 
 /* appearance */
 static const char font[]            = "-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*" "," "-*-termsyn-medium-*-normal-*-14-*-*-*-*-*-*-*";
-/*static const char font[]	= "Dejavu Sans Mono-9:normal";*/
 #define NUMCOLORS	8	
 static const char colors[NUMCOLORS][ColLast][8] = {
    /* border	foreground  background */
@@ -25,7 +24,7 @@ static const unsigned int systrayspacing 	= 1;		/* space between systray icons *
 static const Bool clicktofocus      		= True;     	/* Change focus only on click */
 
 /* tagging */
-static const char *tags[] = { "web", "chat|music", "mail|news", "other" };
+static const char *tags[] = { "web", "term", "mail|news", "other" };
 
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
@@ -36,7 +35,7 @@ static const Rule rules[] = {
 	{ NULL,		NULL,		"irssi",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"ncmpcpp",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"jabber",	1 << 1,		False,		-1 },
-	{ NULL,		NULL,		"mc",		1 << 2,		False,		-1 },
+	{ NULL,		NULL,		"ranger",	1 << 2,		False,		-1 },
 };
 
 /* layout(s) */
@@ -76,7 +75,7 @@ static const char *volup[]		= { "amixer", "-q", "sset", "Master", "4%+", "unmute
 static const char *voldown[]		= { "amixer", "-q", "sset", "Master", "4%-", "unmute", NULL };
 static const char *volmute[]		= { "amixer", "-q", "sset", "Master", "toggle", NULL };
 static const char *screenshotcmd[]	= { "scrot", "-e", "mv $f ~/Desktop 2>/dev/null", NULL };
-static const char *mcmd[]		= { "urxvtc", "-title", "mc", "-e", "mc", NULL };
+static const char *rangercmd[]		= { "urxvtc", "-title", "ranger", "-e", "ranger", NULL };
 static const char *quitcmd[]		= { "killall", "startdwm", NULL };
 static const char *imcmd[]		= { "urxvtc", "-title", "jabber", "-e", "profanity", NULL };
 static const char *newscmd[]		= { "urxvtc", "-title", "newsbeuter", "-e", "newsbeuter", NULL };
@@ -125,7 +124,7 @@ static Key keys[] = {
 	{ 0,				0x1008ff11,	spawn,		{.v = voldown } },
 	{ 0,				0x1008ff12,	spawn,		{.v = volmute } },
 	{ 0,				0xff61,		spawn,		{.v = screenshotcmd } },
-	{ MODKEY|ControlMask,		XK_f,		spawn,		{.v = mcmd } },
+	{ MODKEY|ControlMask,		XK_r,		spawn,		{.v = rangercmd } },
 	{ MODKEY|ControlMask,		XK_q,		spawn,		{.v = quitcmd } },
 	{ MODKEY|ControlMask,		XK_p,		spawn,		{.v = imcmd } },
 	{ MODKEY|ControlMask,		XK_n,		spawn,		{.v = newscmd } },
