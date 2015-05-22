@@ -849,11 +849,16 @@ drawbar(Monitor *m) {
 			urg |= c->tags;
 	}
 	dc.x = 0;
+	/*XSetForeground(dpy, dc.gc, dc.colors[2][ColBG]);*/
+	/*XFillRectangle(dpy, dc.drawable, dc.gc, dc.x, dc.y, sw, bh);*/
 	for(i = 0; i < LENGTH(tags); i++) {
 		dc.w = TEXTW(tags[i]);
 		col = dc.colors[ (m->tagset[m->seltags] & 1 << i ? 1:(urg & 1 << i ? 2:0))];
+		/* col = dc.colors[(m->tagset[m->seltags] & 1 << i) ? 1 : (urg & 1 << i ? 2 : (occ & 1 << i ? 3 : 0))]; */
 		drawtext(tags[i], col, True);
 		drawsquare(m == selmon && selmon->sel && selmon->sel->tags & 1 << i, occ & 1 << i, col);
+		/*XSetForeground(dpy, dc.gc, dc.colors[0][ColBorder]);*/
+		/*XFillRectangle(dpy, dc.drawable, dc.gc, dc.x, dc.h - taglinepx, dc.w, taglinepx);*/
 		dc.x += dc.w;
 	}
 	dc.w = blw = TEXTW(m->ltsymbol);

@@ -19,6 +19,7 @@ static const char colors[NUMCOLORS][ColLast][8] = {
    { "#202020", "#E7EB17",  "#0E0F12" },  // 6 = yellow
    { "#202020", "#CC1818",  "#0E0F12" },  // 7 = red
    { "#202020", "#2865E0",  "#0E0F12" },  // 8 = blue
+   { "#2865E0", "#2865E0",  "#0E0F12" },  // 8 = blue
    // add more here
    };
 static const unsigned int borderpx  		= 1;        	/* border pixel of windows */
@@ -28,9 +29,11 @@ static const Bool topbar            		= True;     	/* False means bottom bar */
 static const Bool showsystray	    		= True;		/* True means show systray */
 static const unsigned int systrayspacing 	= 1;		/* space between systray icons */
 static const Bool clicktofocus      		= True;     	/* Change focus only on click */
+/*static const unsigned int taglinepx		= 2;		tag underline height   */
 
 /* tagging */
 static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
+static const char *tags[] = { "web", "chat<>music", "mail<>news", "media", "other" };
 
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
@@ -44,6 +47,7 @@ static const Rule rules[] = {
 	{ NULL,		NULL,		"jabber",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"ranger",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"mpv",		1 << 3,		True,		-1 },
+	{ "MPlayer",	NULL,		NULL,		1 << 3,		True,		-1 },
 };
 
 /* layout(s) */
