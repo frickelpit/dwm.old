@@ -1,22 +1,28 @@
 /* See LICENSE file for copyright and license details. */
 
+/* includes */
+#include "bstack.c"
+#include "fibonacci.c"
+#include "movestack.c"
+#include "gaplessgrid.c"
+
 /* appearance */
 static const char font[]            = "-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*" "," "-*-termsyn-medium-*-normal-*-14-*-*-*-*-*-*-*";
 #define NUMCOLORS	8	
 static const char colors[NUMCOLORS][ColLast][8] = {
    /* border	foreground  background */
-   { "#2C2C2C", "#ADADAD",  "#2C2C2C" },  // 1 = normal
-   { "#ADADAD", "#4E82AA",  "#2C2C2C" },  // 2 = selected
+   { "#1F1F1F", "#B7B7B7",  "#0E0F12" },  // 1 = normal
+   { "#B7B7B7", "#2865E0",  "#0E0F12" },  // 2 = selected
    { "#202020", "#202020",  "#F0E84D" },  // 3 = urgent/warning
    { "#ff0000", "#ADADAD",  "#ff0000" },  // 4 = error
-   { "#202020", "#29CF13",  "#2C2C2C" },  // 5 = green
-   { "#202020", "#C4BD39",  "#2C2C2C" },  // 6 = yellow
-   { "#202020", "#C70031",  "#2C2C2C" },  // 7 = red
-   { "#202020", "#4E82AA",  "#2C2C2C" },  // 8 = blue
+   { "#202020", "#3DE32D",  "#0E0F12" },  // 5 = green
+   { "#202020", "#E7EB17",  "#0E0F12" },  // 6 = yellow
+   { "#202020", "#CC1818",  "#0E0F12" },  // 7 = red
+   { "#202020", "#2865E0",  "#0E0F12" },  // 8 = blue
    // add more here
    };
 static const unsigned int borderpx  		= 1;        	/* border pixel of windows */
-static const unsigned int snap      		= 5;       	/* snap pixel */
+static const unsigned int snap      		= 10;       	/* snap pixel */
 static const Bool showbar           		= True;     	/* False means no bar */
 static const Bool topbar            		= True;     	/* False means bottom bar */
 static const Bool showsystray	    		= True;		/* True means show systray */
@@ -24,27 +30,26 @@ static const unsigned int systrayspacing 	= 1;		/* space between systray icons *
 static const Bool clicktofocus      		= True;     	/* Change focus only on click */
 
 /* tagging */
-static const char *tags[] = { "web", "term", "mail|news", "other" };
+static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
 
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
 	{ "Firefox",	NULL,		NULL,		1,		False,		-1 },
-	{ "Pcmanfm",	NULL,		NULL,		1 << 3,		True,		-1 },
+	{ "Firefox",	NULL,		"Firefox-Einstellungen",	1,	True,		-1 },
+	{ "Pcmanfm",	NULL,		NULL,		1 << 4,		True,		-1 },
 	{ NULL,		NULL,		"mutt",		1 << 2,		False,		-1 },
 	{ NULL,		NULL,		"newsbeuter",	1 << 2,		False,		-1 },
 	{ NULL,		NULL,		"irssi",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"ncmpcpp",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"jabber",	1 << 1,		False,		-1 },
-	{ NULL,		NULL,		"ranger",	1 << 2,		False,		-1 },
+	{ NULL,		NULL,		"ranger",	1 << 1,		False,		-1 },
+	{ NULL,		NULL,		"mpv",		1 << 3,		True,		-1 },
 };
 
 /* layout(s) */
-static const float mfact      			= 0.55; 	/* factor of master area size [0.05..0.95] */
+static const float mfact      			= 0.56; 	/* factor of master area size [0.05..0.95] */
 static const int nmaster      			= 1;    	/* number of clients in master area */
 static const Bool resizehints 			= False; 	/* True means respect size hints in tiled resizals */
-
-#include "fibonacci.c"
-#include "bstack.c"
 static const Layout layouts[] = {
 	/* symbol	arrange 	function */
 	{ "",		tile },    	/* first entry is default */
@@ -53,6 +58,7 @@ static const Layout layouts[] = {
 	{ "",		spiral },
 	{ "",		dwindle },
 	{ "",		bstack },
+	{ "",		gaplessgrid },
 };
 
 /* key definitions */
@@ -69,21 +75,25 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] 		= { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *termcmd[]  		= { "urxvtc", NULL };
+
 /* my commands*/
 static const char *irccmd[]		= { "urxvtc", "-title", "irssi", "-e", "irssi", NULL };
 static const char *volup[]		= { "amixer", "-q", "sset", "Master", "4%+", "unmute", NULL };
 static const char *voldown[]		= { "amixer", "-q", "sset", "Master", "4%-", "unmute", NULL };
 static const char *volmute[]		= { "amixer", "-q", "sset", "Master", "toggle", NULL };
-static const char *screenshotcmd[]	= { "scrot", "-e", "mv $f ~/Desktop 2>/dev/null", NULL };
+static const char *screenshotcmd[]	= { "scrot", "-e", "mv $f ~/Bilder/Screenshots 2>/dev/null", NULL };
 static const char *rangercmd[]		= { "urxvtc", "-title", "ranger", "-e", "ranger", NULL };
 static const char *quitcmd[]		= { "killall", "startdwm", NULL };
 static const char *imcmd[]		= { "urxvtc", "-title", "jabber", "-e", "profanity", NULL };
 static const char *newscmd[]		= { "urxvtc", "-title", "newsbeuter", "-e", "newsbeuter", NULL };
 static const char *musiccmd[]		= { "urxvtc", "-title", "ncmpcpp", "-e", "ncmpcpp", NULL };
+static const char *browsercmd[]		= { "firefox", NULL };
+static const char *mailcmd[]		= { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
+static const char *filecmd[]		= { "pcmanfm", NULL };
 static const char *rebootcmd[]		= { "systemctl", "reboot", NULL };
 static const char *shutdowncmd[]	= { "systemctl", "poweroff", NULL };
 
-#include "movestack.c"
+/* keybindings */
 static Key keys[] = {
 	/* modifier                     key        	function        argument */
 	{ MODKEY,                       XK_p,      	spawn,          {.v = dmenucmd } },
@@ -105,6 +115,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_s,		setlayout,	{.v = &layouts[3]} },
 	{ MODKEY,			XK_a,		setlayout,	{.v = &layouts[4]} },
 	{ MODKEY,			XK_b,		setlayout,	{.v = &layouts[5]} },
+	{ MODKEY,			XK_g,		setlayout,	{.v = &layouts[6]} },
 	{ MODKEY,                       XK_space,  	setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  	togglefloating, {0} },
 	{ MODKEY,                       XK_0,      	view,           {.ui = ~0 } },
@@ -118,7 +129,7 @@ static Key keys[] = {
         { MODKEY|ControlMask,           XK_Left,    	tagcycle,       {.i = -1 } },
         { MODKEY|ControlMask,           XK_Right,   	tagcycle,       {.i = +1 } },
 
-	/* my keybindings*/
+/* my keybindings*/
 	{ MODKEY|ControlMask,		XK_i,      	spawn,          {.v = irccmd } },
 	{ 0,				0x1008ff13,	spawn,		{.v = volup } },
 	{ 0,				0x1008ff11,	spawn,		{.v = voldown } },
@@ -129,6 +140,9 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_p,		spawn,		{.v = imcmd } },
 	{ MODKEY|ControlMask,		XK_n,		spawn,		{.v = newscmd } },
 	{ MODKEY|ControlMask,		XK_m,		spawn,		{.v = musiccmd } },
+	{ MODKEY|ControlMask,		XK_f,		spawn,		{.v = browsercmd } },
+	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = mailcmd } },
+	{ MODKEY|ShiftMask,		XK_p,		spawn,		{.v = filecmd } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = rebootcmd } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		{.v = shutdowncmd } },
 

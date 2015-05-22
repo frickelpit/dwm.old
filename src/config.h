@@ -1,1 +1,1 @@
-/home/pit/dwm/config.h
+/home/pit/.dwm/config.h
