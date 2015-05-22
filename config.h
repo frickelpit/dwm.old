@@ -19,7 +19,6 @@ static const char colors[NUMCOLORS][ColLast][8] = {
    { "#202020", "#E7EB17",  "#0E0F12" },  // 6 = yellow
    { "#202020", "#CC1818",  "#0E0F12" },  // 7 = red
    { "#202020", "#2865E0",  "#0E0F12" },  // 8 = blue
-   { "#2865E0", "#2865E0",  "#0E0F12" },  // 8 = blue
    // add more here
    };
 static const unsigned int borderpx  		= 1;        	/* border pixel of windows */
@@ -33,7 +32,6 @@ static const Bool clicktofocus      		= True;     	/* Change focus only on click
 
 /* tagging */
 static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
-static const char *tags[] = { "web", "chat<>music", "mail<>news", "media", "other" };
 
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
