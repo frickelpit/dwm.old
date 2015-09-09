@@ -12,13 +12,13 @@ static const char font[]            = "-*-stlarch-medium-r-*-*-11-*-*-*-*-*-*-*"
 static const char colors[NUMCOLORS][ColLast][8] = {
    /* border	foreground  background */
    { "#1F1F1F", "#B7B7B7",  "#0E0F12" },  // 1 = normal
-   { "#B7B7B7", "#2865E0",  "#0E0F12" },  // 2 = selected
+   { "#0DACE3", "#0DACE3",  "#0E0F12" },  // 2 = selected
    { "#202020", "#202020",  "#F0E84D" },  // 3 = urgent/warning
    { "#ff0000", "#ADADAD",  "#ff0000" },  // 4 = error
-   { "#202020", "#3DE32D",  "#0E0F12" },  // 5 = green
+   { "#202020", "#7CDD00",  "#0E0F12" },  // 5 = green
    { "#202020", "#E7EB17",  "#0E0F12" },  // 6 = yellow
-   { "#202020", "#CC1818",  "#0E0F12" },  // 7 = red
-   { "#202020", "#2865E0",  "#0E0F12" },  // 8 = blue
+   { "#202020", "#DB2C38",  "#0E0F12" },  // 7 = red
+   { "#202020", "#0DACE3",  "#0E0F12" },  // 8 = blue
    // add more here
    };
 static const unsigned int borderpx  		= 1;        	/* border pixel of windows */
@@ -28,7 +28,7 @@ static const Bool topbar            		= True;     	/* False means bottom bar */
 static const Bool showsystray	    		= True;		/* True means show systray */
 static const unsigned int systrayspacing 	= 1;		/* space between systray icons */
 static const Bool clicktofocus      		= True;     	/* Change focus only on click */
-/*static const unsigned int taglinepx		= 2;		tag underline height   */
+static const unsigned int taglinepx 		= 1;        	/* tag underline height   */
 
 /* tagging */
 static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
@@ -36,7 +36,7 @@ static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
 	{ "Firefox",	NULL,		NULL,		1,		False,		-1 },
-	{ "Firefox",	NULL,		"Firefox-Einstellungen",	1,	True,		-1 },
+	{ "Gimp",	NULL,		NULL,		1 << 4,		True,		-1 },
 	{ "Pcmanfm",	NULL,		NULL,		1 << 4,		True,		-1 },
 	{ NULL,		NULL,		"mutt",		1 << 2,		False,		-1 },
 	{ NULL,		NULL,		"newsbeuter",	1 << 2,		False,		-1 },
@@ -45,7 +45,6 @@ static const Rule rules[] = {
 	{ NULL,		NULL,		"jabber",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"ranger",	1 << 1,		False,		-1 },
 	{ NULL,		NULL,		"mpv",		1 << 3,		True,		-1 },
-	{ "MPlayer",	NULL,		NULL,		1 << 3,		True,		-1 },
 };
 
 /* layout(s) */
@@ -131,7 +130,7 @@ static Key keys[] = {
         { MODKEY|ControlMask,           XK_Left,    	tagcycle,       {.i = -1 } },
         { MODKEY|ControlMask,           XK_Right,   	tagcycle,       {.i = +1 } },
 
-/* my keybindings*/
+/* my keybindings */
 	{ MODKEY|ControlMask,		XK_i,      	spawn,          {.v = irccmd } },
 	{ 0,				0x1008ff13,	spawn,		{.v = volup } },
 	{ 0,				0x1008ff11,	spawn,		{.v = voldown } },
