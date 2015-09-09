@@ -28,7 +28,6 @@ static const Bool topbar            		= True;     	/* False means bottom bar */
 static const Bool showsystray	    		= True;		/* True means show systray */
 static const unsigned int systrayspacing 	= 1;		/* space between systray icons */
 static const Bool clicktofocus      		= True;     	/* Change focus only on click */
-static const unsigned int taglinepx 		= 1;        	/* tag underline height   */
 
 /* tagging */
 static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
