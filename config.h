@@ -30,7 +30,7 @@ static const unsigned int systrayspacing 	= 1;		/* space between systray icons *
 static const Bool clicktofocus      		= True;     	/* Change focus only on click */
 
 /* tagging */
-static const char *tags[] = { "web", "main", "mail<>news", "media", "other" };
+static const char *tags[] = { "web", "main", "mail&news", "media", "other" };
 
 static const Rule rules[] = {
 	/* class	instance	title		tags mask	isfloating	monitor */
@@ -92,6 +92,9 @@ static const char *mailcmd[]		= { "urxvtc", "-title", "mutt", "-e", "mutt", NULL
 static const char *filecmd[]		= { "pcmanfm", NULL };
 static const char *rebootcmd[]		= { "systemctl", "reboot", NULL };
 static const char *shutdowncmd[]	= { "systemctl", "poweroff", NULL };
+static const char *showmpdcmd[]		= { "/home/pit/.bin/showmpd", NULL };
+static const char *brightup[]		= { "xbacklight", "-inc", "5", NULL };
+static const char *brightdown[]		= { "xbacklight", "-dec", "5", NULL };
 
 /* keybindings */
 static Key keys[] = {
@@ -135,6 +138,8 @@ static Key keys[] = {
 	{ 0,				0x1008ff11,	spawn,		{.v = voldown } },
 	{ 0,				0x1008ff12,	spawn,		{.v = volmute } },
 	{ 0,				0xff61,		spawn,		{.v = screenshotcmd } },
+	{ 0,				0x1008ff02,	spawn,		{.v = brightup } },
+	{ 0,				0x1008ff03,	spawn,		{.v = brightdown } },
 	{ MODKEY|ControlMask,		XK_r,		spawn,		{.v = rangercmd } },
 	{ MODKEY|ControlMask,		XK_q,		spawn,		{.v = quitcmd } },
 	{ MODKEY|ControlMask,		XK_p,		spawn,		{.v = imcmd } },
@@ -145,6 +150,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_p,		spawn,		{.v = filecmd } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = rebootcmd } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		{.v = shutdowncmd } },
+	{ MODKEY|ShiftMask,		XK_i,		spawn,		{.v = showmpdcmd } },
 
 	TAGKEYS(                        XK_1,                      	0)
 	TAGKEYS(                        XK_2,                      	1)
